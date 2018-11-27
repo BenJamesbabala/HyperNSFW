@@ -2,7 +2,7 @@
 
 ### Introduction
 
-This is a Caffe implementation of Not Suitable for Work (NSFW) classification deep neural network. This model is now slightly more accurate than Yahoo's Open NSFW. As a bonus, this model executes ~4x faster. We can run classification with this model at 80msec on the mobile phone. For details, please read the [our blog](https://blog.csdn.net/lsy17096535/article/details/84564976).
+This is a Caffe implementation of Not Suitable for Work (NSFW) classification deep neural network. This model is now slightly more accurate than Yahoo's Open NSFW. As a bonus, this model executes ~4x faster. We can run classification with this model at 80msec on the mobile phone. For details, please read [our blog](https://blog.csdn.net/lsy17096535/article/details/84564976).
 
 ### Evaluate Models with a single image
 
@@ -24,7 +24,7 @@ Expected Outputs:
 
 `cd Prj-Cpp`
 
-Compile detection.cpp with OpenCV 3.4.1 or higher version
+Compile detection.cpp with OpenCV 3.4.1 or higher version.
 
 You can also compile ncnn_mobilenet.cpp with ncnn framework.
 
