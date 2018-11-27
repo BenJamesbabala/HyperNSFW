@@ -31,5 +31,5 @@ HyperNSFW is trained with the following projects, we recommend you to take a loo
 
 ### To Do 
 
-- We will release Android, iOS, Linux Projects soon. 
+- We will release Android and iOS Projects soon. 
 
