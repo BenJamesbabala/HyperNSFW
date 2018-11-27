@@ -1,36 +1,73 @@
-# HyperNSFW-Caffe
+#include <opencv2/opencv.hpp>
+#include <opencv2/dnn.hpp>
+#include <iostream>
 
-### Introduction
+using namespace cv;
+using namespace cv::dnn;
+using namespace std;
 
-This is a Caffe implementation of Not Suitable for Work (NSFW) classification deep neural network. This model is now slightly more accurate than Yahoo's Open NSFW. As a bonus, this model executes ~4x faster. We can run classification with this model at 80msec on the mobile phone. For details, please read the our blog.
+String modelTxt = "model/mobilenet_v2_deploy.prototxt";
+String modelBin = "model/HyperNSFW.caffemodel";
+String labelFile = "model/label.txt";
 
-### Evaluate Models with a single image
+vector<String> readClasslabels() {
+	std::vector<String> classNames;
+	std::ifstream fp(labelFile);
+	if (!fp.is_open())
+	{
+		std::cerr << "File with classes labels not found: " << labelFile << std::endl;
+		exit(-1);
+	}
+	std::string name;
+	while (!fp.eof())
+	{
+		std::getline(fp, name);
+		if (name.length())
+			classNames.push_back(name.substr(name.find(' ') + 1));
+	}
+	fp.close();
+	return classNames;
+}
+
+int main(int argc, char** argv) {
+	Mat testImage = imread("test.jpg");
+	if (testImage.empty()) {
+		printf("could not load image...\n");
+		return -1;
+	}
+
+	Net net = dnn::readNetFromCaffe(modelTxt, modelBin);
+	if (net.empty())
+	{
+		std::cerr << "Can't load network by using the following files: " << std::endl;
+		std::cerr << "prototxt:   " << modelTxt << std::endl;
+		std::cerr << "caffemodel: " << modelBin << std::endl;
+		return -1;
+	}
+
+	vector<String> labels = readClasslabels();
+
+	Mat inputBlob = blobFromImage(testImage, 0.017f, Size(224, 224), Scalar(104, 117, 123),false);
+
+	Mat prob;
+
+	net.setInput(inputBlob, "data");
+
+	prob = net.forward("prob");
 
 
-Evaluate HyperNSFW:
+	Mat probMat = prob.reshape(1, 1); 
+	Point classNumber;
+	double classProb;
+	minMaxLoc(probMat, NULL, &classProb, NULL, &classNumber); 
+	int classIdx = classNumber.x; 
 
-`python eval_image.py --proto model/mobilenet_v2_deploy.prototxt --model model/HyperNSFW.caffemodel  --image ./test.jpg`
+	printf("current image classification : %s, possible : %.2f \n", labels.at(classIdx).c_str(), classProb);
 
-Expected Outputs:
+	putText(testImage, labels.at(classIdx), Point(20, 20), FONT_HERSHEY_SIMPLEX, 0.75, Scalar(0, 0, 255), 2, 8);
 
-```
-0.9302 - 'n16000001 sfw'
-0.0698 - 'n16000002 nsfw'
+	imshow("HyperNSFW", testImage);
+	waitKey(0);
 
-```
-
-### Finetuning on your own data
-
-Prepare your own data and use related files in the train folder to Finetune on your own data.
-
-
-### Related Projects
-HyperNSFW in this repo has been used in the following projects, we recommend you to take a look:
-
-- MobileNet-Caffe [shicai/MobileNet-Caffe](https://github.com/shicai/MobileNet-Caffe)
-
-
-### To Do 
-
-- We will release Android, iOS, Linux Projects soon. 
-
+	return 0;
+}
