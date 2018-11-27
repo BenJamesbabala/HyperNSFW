@@ -9,6 +9,8 @@ This is a Caffe implementation of Not Suitable for Work (NSFW) classification de
 
 Evaluate HyperNSFW:
 
+#### For Python Code
+
 `python eval_image.py --proto model/mobilenet_v2_deploy.prototxt --model model/HyperNSFW.caffemodel  --image ./test.jpg`
 
 Expected Outputs:
@@ -17,6 +19,17 @@ Expected Outputs:
 0.9302 - 'n16000001 sfw'
 0.0698 - 'n16000002 nsfw'
 ```
+
+#### For CPP Code
+
+`cd Prj-Cpp`
+
+Compile detection.cpp with OpenCV 3.4.1 or higher version
+
+You can also compile ncnn_mobilenet.cpp with ncnn framework.
+
+Then test the code.
+
 
 ### Finetuning on your own data
 
