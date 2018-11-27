@@ -29,7 +29,8 @@ HyperNSFW is trained with the following projects, we recommend you to take a loo
 - MobileNet-Caffe [shicai/MobileNet-Caffe](https://github.com/shicai/MobileNet-Caffe)
 
 
-### To Do 
+### Update (2018.11.27)
 
+- cpp code release.
 - We will release Android and iOS Projects soon. 
 
