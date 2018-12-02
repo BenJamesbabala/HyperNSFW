@@ -41,6 +41,9 @@ HyperNSFW is trained with the following projects, we recommend you to take a loo
 
 - MobileNet-Caffe [shicai/MobileNet-Caffe](https://github.com/shicai/MobileNet-Caffe)
 
+### 识别APP
+
+- 体验 Android APP：[https://fir.im/HyperNSFW](https://fir.im/HyperNSFW)
 
 ### Update (2018.11.27)
 
