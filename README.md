@@ -45,8 +45,8 @@ HyperNSFW is trained with the following projects, we recommend you to take a loo
 
 - 体验 Android APP：[https://fir.im/HyperNSFW](https://fir.im/HyperNSFW)
 
-### Update (2018.11.27)
+### Update (2018.12.03)
 
 - cpp code release.
-- We will release Android and iOS Projects soon. 
+- Android Projects release. 
 
