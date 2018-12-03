@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">NSFW</string>
+    <string name="recognize_result">识别结果</string>
+    <string name="recognize_time">识别时间</string>
+</resources>
